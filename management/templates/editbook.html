@@ -1,0 +1,39 @@
+<style>
+  #b11{
+    color :  rgb(98, 0, 128);
+    border: 2px solid rgb(98, 0, 128);
+  }
+  #b11:hover{
+  background-color:  rgb(98, 0, 128);
+  color: aliceblue;
+  }  
+</style>
+{% extends "home.html" %}
+
+{% block content %} 
+  {% if messages %}
+  {%  for message in messages %}
+  <div class="text-danger">{{message}}</div>
+  {%  endfor %}
+  {%  endif %}
+<form method="post" >
+    {% csrf_token %}
+    {% for i in editbook %}
+    <div class="mb-3">
+      <label for="bookname" class="form-label">Book Name</label>
+      <input type="text" class="form-control" id="bookname" name="bookname" value="{{i.bookname}}">
+    </div>
+    <div class="mb-3">
+        <label for="authorname" class="form-label">Author Name</label>
+        <input type="text" class="form-control" id="authorname" name="authorname" value="{{i.author}}">
+    </div>
+    <div class="mb-3">
+        <label for="category" class="form-label">Category</label>
+        <input type="text" class="form-control" id="category" name="category" value="{{i.category}}">
+    </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-outline-primary" id="b11" >Edit Book</button>
+  
+  </form>
+{% endblock %}

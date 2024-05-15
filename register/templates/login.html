@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <!-- <link rel="stylesheet" href="reg.css"> -->
+    <style>
+      body{
+    /* background-image: url("https://assets.architecturaldigest.in/photos/624c2654cf7483eb90e638d6/16:9/w_2560%2Cc_limit/Books-1.jpg");
+    color: rgb(243, 219, 187); */
+    background-color: rgb(238, 238, 238);
+
+    /* display: flex;
+align-items: center;
+justify-content: center; */
+} 
+#firstdiv {
+    /* text-align: center; */
+    display: block;
+    width: 500px;
+     height: 400px;
+     margin: 150px auto ;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid black;
+
+} 
+.l1{
+line-height: 10px;
+font-size: 20px;
+margin-left: 10px;
+}
+     #em{ 
+     margin-left: 10px;
+    }
+    .em1{
+      height: 20px;
+    margin-left :10px;
+
+      width: 300px;
+      font-size: 20px;
+      border-style:outset;
+    }
+    .em1:hover{
+      background-color: rgb(237, 248, 253);
+
+    }
+    #log1:hover{
+  background-color: rgb(138, 68, 223);
+}
+    .log{
+   /* line-height: 80px;  */
+   padding-top: 25px;
+   text-align: center;
+    }
+    #log1{
+  background-color:rgb(123, 0, 255);
+    
+      color: rgb(255, 255, 255);
+      
+      font-size: 20px
+    }
+#h1i{
+    color: rgb(31, 147, 255);
+  color: rgb(123, 0, 255);
+
+text-align: center;
+}
+#link1{
+  text-decoration: none;
+  color:rgb(123, 0, 255);
+}
+#h33{
+  color: rgb(0, 0, 0);
+}  
+#f1{
+  margin-left: 10px;
+  color: rgb(123, 0, 255);
+}
+#ms1{
+  font-size: 25px;
+  margin-left:10px ;
+}
+
+    </style>
+      
+    
+</head>
+<body>
+    <div id="firstdiv">
+        <h1 id="h1i">LOGIN HERE</h1>
+        {% if messages %}
+        {%  for message in messages %}
+        <div id="ms1">{{message}}</div>
+        {%  endfor %}
+        {%  endif %}
+        <!-- {% if messages %}
+        {%  for message in messages %}
+        <div class="text-danger">{{message}}</div>
+        {%  endfor %}
+        {%  endif %} -->
+        <form method="post">
+          {% csrf_token %}
+          <div class="ema">
+             <label for="em" class="l1">username : <br>
+               <input type="text" id="em" name="username" class="em1" placeholder="enter your register email" >
+           </label><br><br>
+           <label for="pw" class="l1">Password : <br>
+            <input type="password" id="pw" name="password" class="em1" placeholder="enter password" >
+        </label><br>
+        <p id="f1"><a href="{%url 'afterclick'%}">Forget Password?</a></p><br>
+
+            </div>
+
+    <div class="log">  <input type="submit" value="Log in" id="log1" onclick=""></div>
+<h3 id="h33"> Don't have an account? <a href="{%url 'regis'%}" id="link1">Sign Up</a></h1>
+        </form>
+    </div>
+</body>
+</html>

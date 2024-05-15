@@ -1,0 +1,61 @@
+<style>
+    #s1,#t1{
+      /* float: right; */
+      border-radius: 50px;
+      border: 2px solid purple;
+      color: purple;
+      background-color: white;
+    } 
+    
+    #s1:hover{
+      background-color: purple;
+      color: aliceblue;
+    }
+  </style>
+  {% extends "home.html" %}
+  {% block content %}
+  <div id="fl">
+  <form action="{% url 'search-book-history' %}" method="post">
+    {% csrf_token %}
+          <input id="t1" type="search" name="bookname" placeholder="enter book name"> 
+          <input id="s1"  type="submit" value="Search">
+        </form>
+      </div>
+  
+  
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-primary" role="alert" style="background-color: rgb(223, 203, 246);">{{ message}}</div>
+  {% endfor %}
+  {% endif %}
+  <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Book Id</th>
+          <th scope="col">Book Name</th>
+          <th scope="col">Author</th>
+          <!-- <th scope="col">ISBN Number</th> -->
+          <th scope="col">Category</th>
+          <th scope="col">Delete Date</th>
+          <th scope="col">Delete Time</th>
+
+          
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in book %}
+        <tr>
+            <td scope="col">{{forloop.counter}}.</td>
+            <td scope="col">{{i.bookid}}</td>
+            <td scope="col">{{i.bookname}}</td>
+            <td scope="col">{{i.author}}</td>
+            <td scope="col">{{i.category}}</td>
+            <td scope="col">{{i.deletedate}}</td>
+            <td scope="col">{{i.deletetime}}</td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+  {% endblock %}

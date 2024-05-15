@@ -1,0 +1,64 @@
+<style>
+    #s1,#t1{
+      border-radius: 50px;
+      border: 2px solid purple;
+      color: purple;
+      background-color: white;
+    } 
+    #s1:hover{
+      background-color: purple;
+      color: aliceblue;
+    }
+  </style>
+  {% extends "home.html" %}
+  
+  {% block content %}
+  <div id="fl">
+    <form action="{% url 'search-returnbook-history' %}" method="post">
+      {% csrf_token %}
+            <input id="t1" type="search" name="stuname" placeholder="enter username"> 
+            <input id="s1"  type="submit" value="Search">
+          </form>
+        </div>
+  
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-primary" role="alert" style="background-color: rgb(223, 203, 246);">{{ message}}</div>
+  {% endfor %}
+  {% endif %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Student Username</th>
+          <th scope="col">Book Name</th>
+          <th scope="col">Book Id</th>
+          <th scope="col">Issued Date</th>
+          <th scope="col">Expiry Date</th>
+          <th scope="col">Returned Date</th>
+          <th scope="col">Fine</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+      
+         {% for i in book %}
+  
+        <tr>
+          <!-- t=(subscriber[0].user,books[0].name,books[0].isbn,i.issued_date,i.expiry_date,fine) -->
+  
+            <td scope="col">{{forloop.counter}}</td>
+            <td scope="col">{{i.stuname}}</td>
+            <td scope="col">{{i.bookid}}</td>
+            <td scope="col">{{i.bookname}}</td>
+            <td scope="col">{{i.issuedate}}</td>
+            <td scope="col">{{i.expirydate}}</td>
+            <td scope="col">{{i.returndate}}</td>
+            <td scope="col">{{i.fine}}</td>
+
+        </tr>
+        {% endfor %}
+       
+    </tbody>
+    </table>
+  {% endblock %}

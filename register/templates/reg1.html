@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>registeration</title>
+   <style>
+   body{
+    background-color: rgb(238, 238, 238);
+
+/* background-image: url("https://assets.architecturaldigest.in/photos/624c2654cf7483eb90e638d6/16:9/w_2560%2Cc_limit/Books-1.jpg");
+color: rgb(243, 219, 187); */
+/* display: flex;
+align-items: center;
+justify-content: center; */
+} 
+#firstdiv {
+/* text-align: center; */
+display: block;
+width: 400px;
+ height: 500px;
+ margin: 150px auto ;
+background-color: rgb(255, 255, 255);
+border: 2px solid black;
+
+} 
+.l1{
+line-height: 10px;
+font-size: 20px;
+margin-left: 10px;
+}
+
+.em1{
+  height: 20px;
+margin-left :10px;
+
+  width: 300px;
+  font-size: 20px;
+  border-style:outset;
+}
+.em1:hover{
+  background-color: rgb(237, 248, 253);
+
+}
+#link1{
+text-decoration: none;
+color: rgb(123, 0, 255);
+}
+.log{
+/* line-height: 100px;  */
+text-align: center;
+}
+
+#h1i{
+text-align: center;
+color: rgb(123, 0, 255);
+}
+#log1{
+background-color: rgb(123, 0, 255);;
+
+  color: rgb(255, 255, 255);
+  
+  font-size: 20px
+}
+#log1:hover{
+  background-color: rgb(138, 68, 223);
+}
+#h33{
+color: rgb(0, 0, 0);
+}  
+#div1{
+background-color: rgb(255, 255, 255);
+display: inline-block;
+}
+#ms1{
+  font-size: 24px;
+  margin-left:10px ;
+}
+    </style>
+</head>
+<body>
+    <div id="firstdiv">
+        <h1 id="h1i">Sign Up</h1>
+        {% if messages %}
+        {%  for message in messages %}
+        <div id="ms1">{{message}}</div>
+        {%  endfor %}
+        {%  endif %}
+        <form  method="post">
+          {% csrf_token %}
+          
+          <label for="nm" class="l1">Name<br>
+            <input type="text" id="nm" name="name" class="em1" placeholder="enter your name">
+           </label><br> <br>
+        <label for="em" class="l1">Email<br>
+               <input type="email" id="em" name=email class="em1" placeholder="enter your email" >
+           </label><br><br>
+      
+            <label for="lid" class="l1">librarian_id<br>
+              <input type="text" id="lid" name="lid" class="em1" placeholder="enter librarian_id">
+            </label><br><br>
+          <label for="pw" class="l1">Password <br>
+            <input type="password" id="pw" name="password" class="em1" placeholder="enter new password">
+        </label>
+        <ul>
+          <li>
+            password can be atmost of 8 characters
+          </li>
+        </ol><br>
+    
+    <div class="log">  <input type="submit" value="sign up" id="log1" ></div>
+   
+    <h3 id="h33"> Aready have account? <a href="{%url 'login'%}" id="link1">Login</a></h3>
+    </form>
+    
+  </div>
+</body>
+</html>

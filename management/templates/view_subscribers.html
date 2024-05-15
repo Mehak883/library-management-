@@ -1,0 +1,84 @@
+<style>
+  #s1,#t1{
+    border-radius: 50px;
+    border: 2px solid purple;
+    color: purple;
+    background-color: white;
+  } 
+  #s1:hover{
+    background-color: purple;
+    color: aliceblue;
+  }
+</style>
+{% extends "home.html" %}
+
+{% block content %}
+<div id="fl">
+  <form action="{% url 'searchstudent' %}" method="post">
+    {% csrf_token %}
+          <input id="t1" type="search" name="username" placeholder="enter username"> 
+          <input id="s1"  type="submit" value="Search">
+        </form>
+      </div>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-primary" role="alert" style="background-color: rgb(223, 203, 246);">{{ message}}</div>
+{% endfor %}
+{% endif %}
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Id</th>
+
+        <th scope="col">Email</th>
+
+        <th scope="col">Time</th>
+        <th scope="col">Verification</th>
+
+      </tr>
+      {% if l%}
+      <tbody>
+    
+        {% for i in l %}
+        <tr>
+          <td scope="col">{{forloop.counter}}.</td>
+        {% for j in i %}
+            <td scope="col">{{j.user.username}}</td>
+            <td scope="col">{{j.id}}</td>
+    
+            <td scope="col">{{j.user.email}}</td>
+    
+            <td scope="col">{{j.created_at}}</td>
+            <td scope="col">{{j.is_verified}}</td>
+    
+            <td><a href="students_delete/{{i.id}}" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete this Subscribers?')">Delete</a></td>
+        </tr>
+        <!-- {% endfor %} -->
+        {% endfor %}
+    
+    {% endif%}
+    </tbody>
+    </thead>
+    {% if student %}
+    <tbody>
+      {% for i in student %}
+      <tr>
+          <td scope="col">{{forloop.counter}}.</td>
+          <td scope="col">{{i.user.username}}</td>
+          <td scope="col">{{i.id}}</td>
+
+          <td scope="col">{{i.user.email}}</td>
+
+          <td scope="col">{{i.created_at}}</td>
+          <td scope="col">{{i.is_verified}}</td>
+
+          <td><a href="students_delete/{{i.id}}" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete this Subscribers?')">Delete</a></td>
+      </tr>
+      {% endfor %}
+{% endif%}
+  </tbody>
+ 
+  </table>
+{% endblock %}

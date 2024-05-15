@@ -1,0 +1,63 @@
+<style>
+  #s1,#t1{
+    border-radius: 50px;
+    border: 2px solid purple;
+    color: purple;
+    background-color: white;
+  } 
+  #s1:hover{
+    background-color: purple;
+    color: aliceblue;
+  }
+</style>
+{% extends "home.html" %}
+
+{% block content %}
+<div id="fl">
+  <form action="{% url 'searchissue' %}" method="post">
+    {% csrf_token %}
+          <input id="t1" type="search" name="stuname" placeholder="enter username"> 
+          <input id="s1"  type="submit" value="Search">
+        </form>
+      </div>
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-primary" role="alert" style="background-color: rgb(223, 203, 246);">{{ message}}</div>
+{% endfor %}
+{% endif %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Student Username</th>
+        <th scope="col">Book Name</th>
+        <th scope="col">Book Id</th>
+        <th scope="col">Issued Date</th>
+        <th scope="col">Expiry Date</th>
+        <th scope="col">Fine</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    
+       {% for i in detail %}
+
+      <tr>
+        <!-- t=(subscriber[0].user,books[0].name,books[0].isbn,i.issued_date,i.expiry_date,fine) -->
+
+          <td scope="col">{{forloop.counter}}</td>
+          <td scope="col">{{i.0}}</td>
+          <td scope="col">{{i.1}}</td>
+          <td scope="col">{{i.2}}</td>
+          <td scope="col">{{i.3}}</td>
+          <td scope="col">{{i.4}}</td>
+          <td scope="col">{{i.5}}</td>
+          <td><a href="ReturnBook/{{i.2}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this book?')">Return</a></td>
+      </tr>
+      {% endfor %}
+     
+  </tbody>
+  </table>
+{% endblock %}
